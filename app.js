@@ -2,6 +2,7 @@ if(process.env.Node_ENV != "production") {
    require('dotenv').config();
 }
 
+const seedDB = require('./init/data');
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -29,9 +30,11 @@ async function main() {
 }
 main().then(() => {
     console.log("connected to db");
+    seedDB();
 }).catch(err => {
     console.log(err);
 });
+
 
 //view engine setup
 app.engine("ejs", ejsMate);
