@@ -9,6 +9,26 @@ const {storage} = require("../cloudConfig.js");
 const upload = multer({ storage }) // Form me file upload krne k liye (File ko cloudinary ke storage me save krega)
 
 
+router.get('/', async (req, res) => {
+  const { q } = req.query;
+  let listings;
+
+  if (q) {
+    const regex = new RegExp(q, 'i'); // case-insensitive search
+    listings = await Listing.find({
+      $or: [
+        { title: regex },
+        { location: regex }
+      ]
+    });
+  } else {
+    listings = await Listing.find({});
+  }
+
+  res.render('listings/index', { listings });
+});
+
+
 
 router.route("/")
   .get( wrapAsync(listingController.index))   //index route
