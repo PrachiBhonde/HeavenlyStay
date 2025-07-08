@@ -1,9 +1,29 @@
 const Listing = require("../models/listing");
 
+// module.exports.index = async (req, res) => {
+//     const allListings = await Listing.find({});
+//     res.render("listings/index.ejs", { allListings });
+// };
+
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
+  const { q } = req.query;
+  let allListings;
+
+  if (q) {
+    const regex = new RegExp(q, 'i');
+    allListings = await Listing.find({
+      $or: [
+        { title: regex },
+        { location: regex }
+      ]
+    });
+  } else {
+    allListings = await Listing.find({});
+  }
+
+  res.render("listings/index", { allListings, q });
 };
+
 
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
