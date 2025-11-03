@@ -25,3 +25,6 @@ Features
 - Image Uploads — Cloudinary integration for hotel/room images  
 - Responsive Design — Optimized for all screen sizes using Bootstrap  
 - Database Integration** — MongoDB for dynamic data storage  
+
+
+<img width="1894" height="910" alt="Screenshot 2025-11-03 100836" src="https://github.com/user-attachments/assets/15391020-b102-4716-a018-5c77efb913ed" />
